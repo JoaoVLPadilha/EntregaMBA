@@ -1,0 +1,12 @@
+
+** TicketController **
+
+	Implementar pesquisa utilizando o seguinte código:
+		knex('users').where('columnName', 'like', '%rowlikeme%')
+		knex('users').whereLike('email', '%mail%')
+
+---------------------------------------------------------------------------------------
+LATE GAME
+
+Enviar id do cliente para buscar chamados via body, porém implementar token posteriormente
+const token = request.headers.authorization;

@@ -1,0 +1,63 @@
+CREATE TABLE subcategoria_chamado (
+	id serial PRIMARY KEY
+	,descricao VARCHAR(30)
+	);
+
+=================================================================
+
+CREATE TABLE tipo_chamado (
+	id serial PRIMARY KEY
+	,descricao VARCHAR(30),
+	subcategoria_id INTEGER NOT NULL
+	);
+
+
+ALTER TABLE tipo_chamado
+    ADD CONSTRAINT tipo_chamado_subcategoria_chamado_fk FOREIGN KEY ( subcategoria_id )
+        REFERENCES subcategoria_chamado ( id );
+
+=================================================================
+
+CREATE TABLE status_chamado (
+	id serial PRIMARY KEY
+	,descricao VARCHAR(10)
+	);
+
+=================================================================
+
+
+CREATE TABLE chamado (
+    id                   	SERIAL,
+    descricao                 VARCHAR(500),
+    fornecedor_id     		INTEGER NOT NULL,
+    cliente_id          	INTEGER NOT NULL,
+    tipo_chamado_id 		INTEGER NOT NULL,
+    subcategoria_chamado_id INTEGER NOT NULL,
+    status_chamado          INTEGER NOT NULL
+);
+
+ALTER TABLE chamado
+    ADD CONSTRAINT chamado_pk PRIMARY KEY ( id,
+                                            fornecedor_id,
+                                            cliente_id,
+                                            tipo_chamado_id );
+
+ALTER TABLE chamado
+    ADD CONSTRAINT chamado_fornecedor_fk FOREIGN KEY ( fornecedor_id )
+        REFERENCES fornecedor ( id );
+
+ALTER TABLE chamado
+    ADD CONSTRAINT chamado_cliente_fk FOREIGN KEY ( cliente_id )
+        REFERENCES cliente ( id );
+
+ALTER TABLE chamado
+    ADD CONSTRAINT chamado_tipo_chamado_fk FOREIGN KEY ( tipo_chamado_id )
+        REFERENCES tipo_chamado ( id );
+
+ALTER TABLE chamado
+    ADD CONSTRAINT subcategoria_chamado_fk FOREIGN KEY ( subcategoria_chamado_id )
+        REFERENCES subcategoria_chamado ( id );
+
+ALTER TABLE chamado
+    ADD CONSTRAINT chamado_status_chamado_fk FOREIGN KEY ( status_chamado_id )
+        REFERENCES status_chamado ( id );
