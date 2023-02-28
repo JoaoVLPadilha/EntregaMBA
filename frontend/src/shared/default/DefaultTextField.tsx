@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField, TextFieldProps, styled } from '@mui/material';
-import { useAppThemeContext } from '../contexts';
 
 type IDefaultTextField = TextFieldProps & {
    label: string;
@@ -20,7 +19,6 @@ const DefaultTextField: React.FC<IDefaultTextField> = ({
    ...rest
 }) => {
 
-   const {themeName} = useAppThemeContext()
 
 
    const DTextField = styled(TextField)({
