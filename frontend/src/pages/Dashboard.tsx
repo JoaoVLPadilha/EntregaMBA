@@ -36,33 +36,32 @@ const Dashboard = () => {
    const [cliente, setCliente] = React.useState<ICliente>();
 
    React.useEffect(() => {
-      // const idCliente = window.localStorage.getItem('user_login');
-      // if (typeof idCliente === 'string') {
-      //    const idInt = parseInt(idCliente);
-      //    axios
-      //       .get(`${ENVIRONMENT.BASE_URL}/cliente/${idInt}`)
-      //       .then((response) => {
-      //          console.log('Cliente', response);
-      //          if (response.statusText === 'OK') setCliente(response.data);
-      //       });
+      const idCliente = window.localStorage.getItem('user_login');
+      if (typeof idCliente === 'string') {
+         const idInt = parseInt(idCliente);
+         axios
+            .get(`${ENVIRONMENT.BASE_URL}/cliente/${idInt}`)
+            .then((response) => {
+               console.log('Cliente', response);
+               if (response.statusText === 'OK') setCliente(response.data);
+            });
 
-      //    axios
-      //       .get(`${ENVIRONMENT.BASE_URL}/chamados/${idInt}`,{
-      //          headers: {'mode': 'no-cors'}
-      //       })
-      //       .then((response) => {
-      //          console.log(response);
-      //          setTickets(response.data);
-      //       });
-      // }
+         axios
+            .get(`${ENVIRONMENT.BASE_URL}/chamados/${idInt}`,{
+               headers: {'mode': 'no-cors'}
+            })
+            .then((response) => {
+               console.log(response);
+               setTickets(response.data);
+            });
+      }
    }, []);
 
-   // if (tickets)
+   if (tickets)
       return (
          <Box width={'100%'} minHeight={'100vh'}>
-            {/* <Navbar razaoSocial={cliente?.razaoSocial} /> */}
-            <Navbar razaoSocial={'Yakult'} />
-            {/* <Box padding={2} display={mobile ? 'block': 'flex'}> */}
+            <Navbar razaoSocial={cliente?.razaoSocial} />
+            <Box padding={2} display={mobile ? 'block': 'grid'} gridTemplateColumns={'1fr'}>
             <Box
                padding={2}
                display={mobile ? 'block' : 'grid'}
@@ -70,89 +69,25 @@ const Dashboard = () => {
                gap={2}
                position={'relative'}
             >
-               {/* {tickets.map((ticket) => { */}
-                  {/* return ( */}
+               {tickets.map((ticket) => {
+                  return (
                      <Cases
-                        key={1}
-                        tipoChamado={'Financeiro'}
-                        idChamado={'2'}
-                        categoria={'Valor do boleto incorreto'}
-                        descricao={'Valor da NFE divergênte do boleto, por favor correção do valor do boleto como também acompanhar a data de vencimento com o envio do boleto com valor correto '}
-                        // key={ticket.chamadoId}
-                        // tipoChamado={ticket.tipoChamado}
-                        // idChamado={ticket.chamadoId}
-                        // categoria={ticket.subcategoriaChamado}
-                        // descricao={ticket.descricao}
-                     />
-                     <Cases
-                        key={1}
-                        tipoChamado={'Financeiro'}
-                        idChamado={'2'}
-                        categoria={'Valor do boleto incorreto'}
-                        descricao={'Valor da NFE divergênte do boleto, por favor correção do valor do boleto como também acompanhar a data de vencimento com o envio do boleto com valor correto '}
-                        // key={ticket.chamadoId}
-                        // tipoChamado={ticket.tipoChamado}
-                        // idChamado={ticket.chamadoId}
-                        // categoria={ticket.subcategoriaChamado}
-                        // descricao={ticket.descricao}
-                     />
-                     <Cases
-                        key={1}
-                        tipoChamado={'Financeiro'}
-                        idChamado={'2'}
-                        categoria={'Valor do boleto incorreto'}
-                        descricao={'Valor da NFE divergênte do boleto, por favor correção do valor do boleto como também acompanhar a data de vencimento com o envio do boleto com valor correto '}
-                        // key={ticket.chamadoId}
-                        // tipoChamado={ticket.tipoChamado}
-                        // idChamado={ticket.chamadoId}
-                        // categoria={ticket.subcategoriaChamado}
-                        // descricao={ticket.descricao}
-                     />
-                     <Cases
-                        key={1}
-                        tipoChamado={'Financeiro'}
-                        idChamado={'2'}
-                        categoria={'Valor do boleto incorreto'}
-                        descricao={'Valor da NFE divergênte do boleto, por favor correção do valor do boleto como também acompanhar a data de vencimento com o envio do boleto com valor correto '}
-                        // key={ticket.chamadoId}
-                        // tipoChamado={ticket.tipoChamado}
-                        // idChamado={ticket.chamadoId}
-                        // categoria={ticket.subcategoriaChamado}
-                        // descricao={ticket.descricao}
-                     />
-                     <Cases
-                        key={1}
-                        tipoChamado={'Financeiro'}
-                        idChamado={'2'}
-                        categoria={'Valor do boleto incorreto'}
-                        descricao={'Valor da NFE divergênte do boleto, por favor correção do valor do boleto como também acompanhar a data de vencimento com o envio do boleto com valor correto '}
-                        // key={ticket.chamadoId}
-                        // tipoChamado={ticket.tipoChamado}
-                        // idChamado={ticket.chamadoId}
-                        // categoria={ticket.subcategoriaChamado}
-                        // descricao={ticket.descricao}
-                     />
-                     <Cases
-                        key={1}
-                        tipoChamado={'Financeiro'}
-                        idChamado={'2'}
-                        categoria={'Valor do boleto incorreto'}
-                        descricao={'Valor da NFE divergênte do boleto, por favor correção do valor do boleto como também acompanhar a data de vencimento com o envio do boleto com valor correto '}
-                        // key={ticket.chamadoId}
-                        // tipoChamado={ticket.tipoChamado}
-                        // idChamado={ticket.chamadoId}
-                        // categoria={ticket.subcategoriaChamado}
-                        // descricao={ticket.descricao}
-                     />
-                  {/* ); */}
-               {/* })} */}
+                        key={ticket.chamadoId}
+                        tipoChamado={ticket.tipoChamado}
+                        idChamado={ticket.chamadoId}
+                        categoria={ticket.subcategoriaChamado}
+                        descricao={ticket.descricao}
+                        />
+                   )
+                })}
                <Add />
             </Box>
          </Box>
+         </Box>
       );
-   // else {
-   //    return null;
-   // }
+       else {
+      return null;
+   }
 };
 
 export default Dashboard;

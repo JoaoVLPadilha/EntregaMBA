@@ -30,7 +30,7 @@ const Home = () => {
    const handleLogin = (data: any) => {
       console.log(data);
       axios.get(`${ENVIRONMENT.BASE_URL}/test`).then(response =>{
-         console.log(response)
+      console.log(response)
       })
 
       axios
