@@ -43,13 +43,12 @@ const Dashboard = () => {
             .get(`${ENVIRONMENT.BASE_URL}/cliente/${idInt}`)
             .then((response) => {
                console.log('Cliente', response);
-               if (response.statusText === 'OK') setCliente(response.data);
+               console.log('RazaoSocial', response.data.razaoSocial);
+               setCliente(response.data);
             });
 
          axios
-            .get(`${ENVIRONMENT.BASE_URL}/chamados/${idInt}`,{
-               headers: {'mode': 'no-cors'}
-            })
+            .get(`${ENVIRONMENT.BASE_URL}/chamados/${idInt}`)
             .then((response) => {
                console.log(response);
                setTickets(response.data);
@@ -57,35 +56,39 @@ const Dashboard = () => {
       }
    }, []);
 
-   if (tickets)
+   if (tickets && cliente) {
       return (
          <Box width={'100%'} minHeight={'100vh'}>
             <Navbar razaoSocial={cliente?.razaoSocial} />
-            <Box padding={2} display={mobile ? 'block': 'grid'} gridTemplateColumns={'1fr'}>
             <Box
                padding={2}
                display={mobile ? 'block' : 'grid'}
-               gridTemplateColumns={'1fr 1fr'}
-               gap={2}
-               position={'relative'}
+               gridTemplateColumns={'1fr'}
             >
-               {tickets.map((ticket) => {
-                  return (
-                     <Cases
-                        key={ticket.chamadoId}
-                        tipoChamado={ticket.tipoChamado}
-                        idChamado={ticket.chamadoId}
-                        categoria={ticket.subcategoriaChamado}
-                        descricao={ticket.descricao}
+               <Box
+                  padding={2}
+                  display={mobile ? 'block' : 'grid'}
+                  gridTemplateColumns={'1fr 1fr'}
+                  gap={2}
+                  position={'relative'}
+               >
+                  {tickets!.map((ticket) => {
+                     return (
+                        <Cases
+                           key={ticket.chamadoId}
+                           tipoChamado={ticket.tipoChamado}
+                           idChamado={ticket.chamadoId}
+                           categoria={ticket.subcategoriaChamado}
+                           descricao={ticket.descricao}
                         />
-                   )
-                })}
-               <Add />
+                     );
+                  })}
+                  <Add />
+               </Box>
             </Box>
          </Box>
-         </Box>
       );
-       else {
+   } else {
       return null;
    }
 };

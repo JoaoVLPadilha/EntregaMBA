@@ -20,12 +20,6 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: "space-between",
 });
 
-const Search = styled("div")(({ theme }) => ({
-  backgroundColor: "white",
-  padding: "0 10px",
-  borderRadius: theme.shape.borderRadius,
-  width: "40%",
-}));
 
 const Icons = styled(Box)(({ theme }) => ({
   display: "none",
@@ -36,18 +30,17 @@ const Icons = styled(Box)(({ theme }) => ({
   },
 }));
 
-const UserBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-  [theme.breakpoints.up("sm")]: {
-    display: "none",
-  },
-}));
 interface INavbar{
   razaoSocial?: string
 }
+
+
+
 const Navbar:React.FC<INavbar> = ({razaoSocial}) => {
+
+  React.useEffect(() =>{
+    console.log(razaoSocial)
+  },[])
   const { toggleDrawerOpen } = useDrawerContext();
   const [open, setOpen] = useState(false);
   return (
