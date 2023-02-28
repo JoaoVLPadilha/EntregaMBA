@@ -64,7 +64,8 @@ const CreateTicket = () => {
       axios
          .get(`${ENVIRONMENT.BASE_URL}/fornecedor/?cnpj=${cnpjInput}`)
          .then((response) => {
-            if(response.statusText === 'OK'){
+            console.log(response)
+            if(response.status === 200){
 
                console.log(response);
                setFornecedorRazaoSocial(response.data.razaoSocial);
@@ -91,7 +92,7 @@ const CreateTicket = () => {
          .post(`${ENVIRONMENT.BASE_URL}/chamado`, data)
          .then((response) => {
             console.log(response);
-            if (response.statusText === 'Created') {
+            if (response.status === 200 || response.status === 201) {
                setOpenAviso(true);
             } else{
                setOpenErrorCreateAviso(true)
